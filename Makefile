@@ -1,7 +1,7 @@
 CFLAGS = -Wall -Wextra -Werror
 CC = gcc
 BINARY = libftprintf.a
-CFILES = ft_printf.c print_args.c
+CFILES = ft_printf.c print_args.c print_hex.c
 OBJECTS = $(CFILES:.c=.o)
 
 all: $(BINARY)
