@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:53:18 by ishaaq            #+#    #+#             */
-/*   Updated: 2024/12/24 16:33:07 by isahmed          ###   ########.fr       */
+/*   Updated: 2024/12/24 16:44:16 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ void	ft_itoh(unsigned long n, int upper, int *characters);
 void	ft_putlhex(unsigned long p, int *characters);
 void	ft_putuhex(unsigned long p, int *characters);
 void	ft_putuint(unsigned int n, int *characters);
-int     ft_format(va_list args, char c, int chars);
+int		ft_format(va_list args, char c, int chars);
 
 #endif
