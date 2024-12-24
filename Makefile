@@ -1,16 +1,23 @@
-# Variables
-NAME = libftprintf.a
-CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-SRCS = print_args.c ft_printf.c
-OBJDIR = obj/
-OBJS = $(addprefix $(OBJDIR), $(SRCS:.c=.o))
-HEADER = ft_printf.h
-TEST = main.c
+CC = gcc
+BINARY = libftprintf.a
+CFILES = ft_printf.c print_args.c
+OBJECTS = $(CFILES:.c=.o)
 
-# Default Target
-all: $(NAME)
+all: $(BINARY)
 
-# Build Static Library
-$(NAME): $(OBJS)
-	
+$(BINARY): $(OBJECTS)
+	ar rcs $@ $(OBJECTS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -rf $(OBJECTS)
+
+fclean: clean
+	rm -rf $(BINARY)
+
+re: fclean all
+
+.PHONY: all clean fclean re

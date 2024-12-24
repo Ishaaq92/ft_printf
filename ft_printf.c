@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishaaq <ishaaq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:53:13 by ishaaq            #+#    #+#             */
-/*   Updated: 2024/12/23 08:20:52 by ishaaq           ###   ########.fr       */
+/*   Updated: 2024/12/24 15:10:16 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,44 +29,54 @@ int	ft_printf(const char *format, ...)
 {
 	va_list	args; // Saves arguments to args
 	int		i;
+	int		characters;
 
 	i = 0;
-
-	
+	characters = 0;
 	va_start(args, format); // Initialises
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%' && validate(format[i + 1]) >= 0)
 		{
 			if (format[i + 1] == 'c')
-				ft_putchar((char) va_arg(args, int));
+				ft_putchar((char) va_arg(args, int), &characters);
 			else if (format[i + 1] == 's')
-				ft_putstr((char *) va_arg(args, char*));
+				ft_putstr((char *) va_arg(args, char*), &characters);
 			else if (format[i + 1] == 'p')
-				ft_putpointer((unsigned long *) va_arg(args, void *));
-			else if (format[i + 1] == 'd')
-				ft_putuint( va_arg(args, int));
+				ft_putpointer((unsigned long *) va_arg(args, void *), &characters);
+			else if (format[i + 1] == 'd' || format[i + 1] == 'i')
+				ft_putint(va_arg(args, int), &characters);
 			else if (format[i + 1] == 'u')
-				ft_putint((unsigned long) va_arg(args, unsigned int));
+				ft_putuint((unsigned long) va_arg(args, unsigned int), &characters);
 			else if (format[i + 1] == 'x')
-				ft_itoh(va_arg(args, unsigned int), 0);
+				ft_itoh(va_arg(args, unsigned int), 0, &characters);
 			else if (format[i + 1] == 'X')
-				ft_itoh(va_arg(args, unsigned int), 1);
+				ft_itoh(va_arg(args, unsigned int), 1, &characters);
 			else if (format[i + 1] == '%')
-				write(1, "%", 1);
+				ft_putchar('%', &characters);
 			i +=2;
 		}
 		else
+		{
 			write(1, &format[i++], 1);
+			characters++;
+		}
 	}
 	va_end(args);
-	return(0);
+	return(characters);
 }
 
-int	main(void)
-{
-	char *s = "Ishaaq Ahmed";
-	ft_printf(" %c %c %c ", '0', 0, '1');
-	printf("\n");
-	printf(" %c %c %c ", '0', 0, '1');
-}
+// int	main(void)
+// {
+// 	char *s = "Ishaaq Ahmed";
+// 	int num1 = ft_printf(" NULL %s NULL ", NULL);
+// 	printf("\n");
+// 	// int num2 = printf(" NULL %s NULL ", NULL);
+ 
+// 	printf("\n");  
+
+// 	printf("ft_printf: (%d)", num1);
+// 	// printf("printf: (%d)", num2);
+   
+// 	// printf("%d", ft_printf("%c", 'k'));
+// }
